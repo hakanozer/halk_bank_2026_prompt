@@ -1,0 +1,3 @@
+- tek bir html dosyası oluştur ve tüm analiz sonuçlarını bu dosyada sun.
+- oluşturulan grafikleri ve tabloları html dosyasında inline olarak göster.
+- Html içinde şu tahminler görünsün: mesaj ile aktarılacak.

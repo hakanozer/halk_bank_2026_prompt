@@ -1,0 +1,6 @@
+- Python yazılım dilini kullan
+- Html çıktı için html ve inline javascript ve css kullan
+- siparisler_cleaned.csv ana klasördedir.
+- ML için scikit-learn kütüphanesini kullan
+- Veri görselleştirme için matplotlib ve seaborn kütüphanelerini kullan
+- Api için FastAPI kütüphanesini kullan

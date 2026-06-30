@@ -89,3 +89,26 @@ class DataAnalyzer:
         category_stats['ortalama_harcama'] = (category_stats['toplam_harcama'] / category_stats['siparis_sayisi']).round(2)
         
         return category_stats.sort_values('toplam_harcama', ascending=False)
+    
+    def get_trending_customers_last_week(self):
+        """Son bir hafta içinde trend müşterileri analiz et"""
+        week_ago = self.current_date - timedelta(days=7)
+        
+        # Son bir haftanın verilerini filtrele
+        last_week_df = self.df[self.df['tarih'] >= week_ago]
+        
+        # Müşteri başına istatistikler
+        trending_customers = last_week_df.groupby('musteri_adi').agg({
+            'siparis_id': 'count',
+            'toplam_harcama': 'sum',
+            'tarih': ['min', 'max']
+        }).reset_index()
+        
+        trending_customers.columns = ['musteri_adi', 'siparis_sayisi', 'toplam_harcama', 'ilk_siparis', 'son_siparis']
+        
+        # Sipariş sıklığı ve harcama artışını hesapla
+        trending_customers['ort_siparis_degeri'] = (trending_customers['toplam_harcama'] / trending_customers['siparis_sayisi']).round(2)
+        trending_customers['trend_skoru'] = (trending_customers['siparis_sayisi'] * trending_customers['ort_siparis_degeri']).round(2)
+        
+        return trending_customers[['musteri_adi', 'siparis_sayisi', 'toplam_harcama', 'ort_siparis_degeri', 'trend_skoru']].sort_values('trend_skoru', ascending=False).head(10)
+

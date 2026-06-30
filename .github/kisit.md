@@ -1,0 +1,2 @@
+- Veritababı kullanma
+- yukarıkdai maddeler dışında bir şey yapma 
